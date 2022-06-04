@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  broker:
+    build: ./rabbitmq
+    networks:
+      - internal
+
+  worker:
+    build: ./worker
+    command: tail -F anything
+    networks:
+      - internal
+
+networks:
+  internal:
+    name: celery-internal
