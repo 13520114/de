@@ -9,6 +9,8 @@ services:
   worker:
     build: ./worker
     command: tail -F anything
+    volumes:
+      - ./proj:/home/danh/celery/proj
     networks:
       - internal
 
