@@ -14,5 +14,10 @@ RUN mkdir -p /home/danh/miniconda3 && \
     bash /home/danh/miniconda3/miniconda.sh -b -u -p /home/danh/miniconda3 && \
     rm -rf /home/danh/miniconda3/miniconda.sh && \
     /home/danh/miniconda3/bin/conda init bash && \
-    /home/danh/miniconda3/bin/conda create --name de python=3.9 && \
-    /home/danh/miniconda3/bin/conda install --name de -c conda-forge celery pika
+    /home/danh/miniconda3/bin/conda create --name de python=3.9
+
+SHELL ["/bin/bash", "-ec"]
+
+RUN source /home/danh/miniconda3/bin/activate && \
+    conda activate de && \
+    pip install "celery[librabbitmq,redis,auth,msgpack]"

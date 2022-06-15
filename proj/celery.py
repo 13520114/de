@@ -3,7 +3,7 @@ from celery import Celery
 
 app = Celery('proj',
              broker='amqp://de-broker-1',
-             backend='rpc://',
+             backend='redis://de-result_backend-1',
              include=['proj.tasks'])
 
 

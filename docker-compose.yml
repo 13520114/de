@@ -6,6 +6,11 @@ services:
     networks:
       - internal
 
+  result_backend:
+    build: ./result_backend
+    networks:
+      - internal
+
   worker:
     build: ./worker
     command: tail -F anything
