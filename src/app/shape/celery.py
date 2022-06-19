@@ -1,9 +1,9 @@
 from celery import Celery
-from proj.config import Config001
+from src.config import ShapeConfig
 
 
 app = Celery()
-app.config_from_object(Config001)
+app.config_from_object(ShapeConfig)
 
 
 if __name__ == '__main__':

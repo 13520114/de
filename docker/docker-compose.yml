@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  broker:
+    build:
+      context: broker
+    image: kromlab_broker
+    container_name: kromlab_broker
+    networks:
+      - internal
+
+  result_backend:
+    build:
+      context: result_backend
+    image: kromlab_result_backend
+    container_name: kromlab_result_backend
+    networks:
+      - internal
+
+  worker:
+    build:
+      context: worker
+      args:
+        - USERNAME=${USERNAME:-danh}
+    image: kromlab_worker
+    container_name: kromlab_worker
+    volumes:
+      - ${PROJECT_DIR}/src:/home/${USERNAME:-danh}/src
+    networks:
+      - internal
+
+  database:
+    build:
+      context: database
+    image: kromlab_database
+    container_name: kromlab_database
+    environment:
+      - POSTGRES_USER=kromlab
+      - POSTGRES_PASSWORD=kromlab
+      - POSTGRES_DB=kromlab
+    volumes:
+      - ${DATABASE_DIR:-postgres-db-volume}:/var/lib/postgresql/data
+    networks:
+      - internal
+
+networks:
+  internal:
+    name: kromlab-internal
