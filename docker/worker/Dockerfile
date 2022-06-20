@@ -9,7 +9,7 @@ ARG CONDA_SCRIPT_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux
 # Install required softwares
 RUN apt upgrade -y && \
     apt update -y && \
-    apt install -y wget build-dep python-psycopg2
+    apt install -y wget
 
 # Create a dedicated user
 RUN useradd -ms /bin/bash ${USERNAME}
