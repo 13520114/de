@@ -29,6 +29,16 @@ services:
     networks:
       - internal
 
+  client:
+    image: kromlab_worker
+    container_name: kromlab_client
+    volumes:
+      - ${PROJECT_DIR}/src:/home/${USERNAME:-danh}/src
+    ports:
+      - "5000:5000"
+    networks:
+      - internal
+
   database:
     build:
       context: database

@@ -1,4 +1,3 @@
-from sqlalchemy import select, update
 from sqlalchemy import Column, Integer
 from src.postgres import pg_handler, BaseModel
 
@@ -14,6 +13,13 @@ class Shape(BaseModel):
 
     def calc_perimeter(self):
         pass
+
+    @classmethod
+    def list_all(cls):
+        all = None
+        with pg_handler.get_session() as session:
+            all = session.query(cls).order_by(cls.id).all()
+        return all
 
     @classmethod
     def find_by_id(cls, id):

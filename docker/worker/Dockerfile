@@ -29,7 +29,10 @@ SHELL ["/bin/bash", "-ec"]
 # Install Celery libraries and its required other libs
 RUN source ${CONDA_DIR}/bin/activate && \
     conda activate de && \
-    pip install "celery[librabbitmq,redis,auth,msgpack]" psycopg2-binary SQLAlchemy
+    pip install "celery[librabbitmq,redis,auth,msgpack]" \
+                psycopg2-binary \
+                SQLAlchemy \
+                Flask
 
 # Change default command to keep container alive
 CMD ["tail", "-F", "anything"]

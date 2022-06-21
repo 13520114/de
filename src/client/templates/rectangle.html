@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rectangles</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>a</th>
+      <th>b</th>
+      <th>area</th>
+      <th>perimeter</th>
+    </tr>
+
+    {% if rectangles %}
+    {% for rectangle in rectangles %}
+      <tr>
+        <td>{{ rectangle.id }}</td>
+        <td>{{ rectangle.a }}</td>
+        <td>{{ rectangle.b }}</td>
+        <td>{{ rectangle.area }}</td>
+        <td>{{ rectangle.perimeter }}</td>
+      </tr>
+    {% endfor %}
+    {% endif %}
+  </table>
+</body>
+
+</html>
