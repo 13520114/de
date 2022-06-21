@@ -4,4 +4,5 @@ from src.module.shape.model.rectangle import Rectangle
 
 
 Rectangle = Rectangle
+Shape.create_schema()
 Shape.metadata.create_all(pg_handler.get_engine())

@@ -24,6 +24,8 @@ services:
         - USERNAME=${USERNAME:-danh}
     image: kromlab_worker
     container_name: kromlab_worker
+    depends_on:
+      - database
     environment:
       - PYTHONPATH=/home/${USERNAME:-danh}/workspace
     volumes:
@@ -39,9 +41,9 @@ services:
 
   client:
     image: kromlab_worker
+    container_name: kromlab_client
     depends_on:
       - worker
-    container_name: kromlab_client
     environment:
       - FLASK_APP=main
       - PYTHONPATH=/home/${USERNAME:-danh}/workspace
