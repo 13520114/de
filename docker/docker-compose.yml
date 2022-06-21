@@ -24,16 +24,35 @@ services:
         - USERNAME=${USERNAME:-danh}
     image: kromlab_worker
     container_name: kromlab_worker
+    environment:
+      - PYTHONPATH=/home/${USERNAME:-danh}/workspace
     volumes:
-      - ${PROJECT_DIR}/src:/home/${USERNAME:-danh}/src
+      - ${PROJECT_DIR}/src:/home/${USERNAME:-danh}/workspace/src
+    command: >
+      bash -c "
+      source /home/${USERNAME:-danh}/miniconda3/bin/activate &&
+      conda activate de &&
+      cd /home/${USERNAME:-danh}/workspace/ &&
+      celery -A src.app.shape worker -l INFO"
     networks:
       - internal
 
   client:
     image: kromlab_worker
+    depends_on:
+      - worker
     container_name: kromlab_client
+    environment:
+      - FLASK_APP=main
+      - PYTHONPATH=/home/${USERNAME:-danh}/workspace
     volumes:
-      - ${PROJECT_DIR}/src:/home/${USERNAME:-danh}/src
+      - ${PROJECT_DIR}/src:/home/${USERNAME:-danh}/workspace/src
+    command: >
+      bash -c "
+      source /home/${USERNAME:-danh}/miniconda3/bin/activate &&
+      conda activate de &&
+      cd /home/${USERNAME:-danh}/workspace/src/client &&
+      flask run --host=0.0.0.0"
     ports:
       - "5000:5000"
     networks:
