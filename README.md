@@ -7,6 +7,10 @@ Its main functionalities consist of:
 - Updating an existing rectangle: calculate area and perimeter of existing rectangle (its id must be provided). If there is not any rectangle with provided id, just ignore the updating operation.
 - Listing existing rectangles: show all existing rectangles in Postgres database.
 
+To perform those 3 features, I use Celery and Rabbitmq to queue and manage message routing.\
+The architecture is described as below:\
+![](architect.png)
+
 ## Prerequisite
 - docker with compose plugin (current testing version: 20.10.16)
 
@@ -23,7 +27,7 @@ There are 5 containers:
   To list all existing rectangles:\
   http://localhost:5000/rectangle/ \
   To create a new rectangle (**value_a** and **value_a** are integer):\
-  http://localhost:5000/rectangle/create?a={value_a}&b={value_b}\
+  http://localhost:5000/rectangle/create?a={value_a}&b={value_b} \
   To update an existing rectangle (**id** is integer):\
   http://localhost:5000/rectangle/update/{id}
 - kromlab_worker: The celery app is running on this container.
