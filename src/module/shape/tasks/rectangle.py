@@ -17,8 +17,8 @@ def create(a, b):
     rectangle = Rectangle()
     rectangle.a = a
     rectangle.b = b
-    rectangle.update()
-    return {'status': 'OK', 'a': a, 'b': b}
+    rectangle_id = rectangle.update()
+    return {'id': rectangle_id, 'a': a, 'b': b}
 
 
 @app.task

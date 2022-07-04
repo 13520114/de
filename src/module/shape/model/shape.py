@@ -31,7 +31,11 @@ class Shape(BaseModel):
     def update(self):
         with pg_handler.get_session() as session:
             session.add(self)
+            session.flush()
+            shape_id = self.id
             session.commit()
+
+        return shape_id
 
 
 Shape = pg_handler.get_base_model_class(Shape)

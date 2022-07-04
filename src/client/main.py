@@ -32,11 +32,8 @@ def create_rectangle():
     if not b.isdigit():
         return 'b is not digit!'
 
-    create.delay(int(a), int(b))
-    return f'Creating new rectangle which has a={a}, b={b}'
-
-
-@app.route('/rectangle/update/<int:id>')
-def update_rectangle(id):
-    update.delay(id)
-    return f'Updating rectangle which has id {id}'
+    result = create.delay(int(a), int(b))
+    new_rectangle = result.get()
+    update.delay(new_rectangle['id'])
+    return f'New rectangle a={a}, b={b} is created successfully!.' \
+           f'\nCalculating area and perimeter asynchronously'
