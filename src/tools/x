@@ -1,0 +1,26 @@
+import click
+import requests
+
+
+@click.group()
+def cli():
+    pass
+
+
+@click.command()
+@click.option('--link', help='Link which is crawled')
+@click.option('--output-file', help='Output file name')
+def crawl(link, output_file):
+    click.echo(f'Crawling link: {link}')
+    click.echo(f'Output file: {output_file}')
+    r = requests.get(link)
+    if r.status_code == 200:
+        with open(output_file, 'w') as f:
+            f.write(r.text)
+
+
+cli.add_command(crawl)
+
+
+if __name__ == '__main__':
+    cli()
