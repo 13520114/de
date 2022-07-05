@@ -2,11 +2,18 @@ from sqlalchemy import Column, Integer
 from src.postgres import pg_handler, BaseModel
 
 
+class InvalidInputException(BaseException):
+    pass
+
+
 class Shape(BaseModel):
     __table_args__ = {'schema': 'shape'}
     area = Column(Integer)
     perimeter = Column(Integer)
     id = Column(Integer, primary_key=True)
+
+    def _validate(self):
+        pass
 
     def calc_area(self):
         pass

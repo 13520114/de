@@ -32,7 +32,8 @@ RUN source ${CONDA_DIR}/bin/activate && \
     pip install "celery[librabbitmq,redis,auth,msgpack]" \
                 psycopg2-binary \
                 SQLAlchemy \
-                Flask
+                Flask \
+                pytest
 
 # Change default command to keep container alive
 CMD ["tail", "-F", "anything"]

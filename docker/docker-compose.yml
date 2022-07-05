@@ -30,6 +30,7 @@ services:
       - PYTHONPATH=/home/${USERNAME:-danh}/workspace
     volumes:
       - ${PROJECT_DIR}/src:/home/${USERNAME:-danh}/workspace/src
+      - ${PROJECT_DIR}/tests:/home/${USERNAME:-danh}/workspace/tests
     command: >
       bash -c "
       source /home/${USERNAME:-danh}/miniconda3/bin/activate &&
