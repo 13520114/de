@@ -74,6 +74,19 @@ services:
     networks:
       - internal
 
+  pgadmin:
+    build:
+      context: pgadmin
+    image: kromlab_pgadmin
+    container_name: kromlab_pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=danh.vo@xomad.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "8000:80"
+    networks:
+      - internal
+
 networks:
   internal:
     name: kromlab-internal
